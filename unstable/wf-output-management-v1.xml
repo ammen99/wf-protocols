@@ -1,0 +1,79 @@
+<protocol name="wf_output_management">
+    <interface name="wf_output" version="1">
+
+        <event name="name">
+            <desciption>
+                Represents a human-readable name for the output.
+                Usually this is the output's connector name.
+                The name is usually preserved across sessions.
+            </description>
+            <arg name="name" type="string"/>
+        </event>
+
+        <event name="layout">
+            <description>
+                The output coordinates in the global coordinate space
+            </description>
+            <arg name="x" type="int"/>
+            <arg name="y" type="int"/>
+        </event>
+
+        <request name="set_layout">
+            <arg name="x" type="int"/>
+            <arg name="y" type="int"/>
+        </request>
+
+        <enum name="relative_layout">
+            <entry name="left" value="1"/>
+            <entry name="right" value="2"/>
+            <entry name="top" value="3"/>
+            <entry name="bottom" value="4"/>
+        </enum>
+
+        <request name="set_relative_layout">
+            <arg name="position" type="int" enum="relative_layout"/>
+            <arg name="output" type="string"/>
+        </request>
+
+        <event name="available_mode">
+            <description>
+                Sends an available mode for the output
+            </description>
+            <arg name="width" type="int"/>
+            <arg name="height" type="int"/>
+            <arg name="refresh" type="int"/>
+            <arg name="current" type="bool" summary="whether this is the currently used mode"/>
+        </event>
+
+        <request name="set_mode">
+            <arg name="width" type="int"/>
+            <arg name="height" type="int"/>
+            <arg name="refresh" type="int"/>
+        </request>
+
+        <event name="transform">
+            <arg name="transform" type="uint" summary="same as wl_output::transform"/>
+        </event>
+
+        <request name="set_transform">
+            <arg name="transform" type="uint" summary="same as wl_output::transform"/>
+        </request>
+
+        <event name="scale">
+            <arg name="scale" type="float"/>
+        </event>
+
+        <request name="set_scale">
+            <arg name="scale" type="float"/>
+        </request>
+
+        <request name="destroy" type="destructor"/>
+    </interface>
+
+    <interface name="zwf_output_manager_v1" version="1">
+        <request name="get_wf_output">
+            <arg name="id" type="new_id" interface="wf_output"/>
+            <arg name="output" type="object" interface="wl_output"/>
+        </request>
+    </interface>
+</protocol>
