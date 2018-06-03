@@ -2,7 +2,7 @@
     <interface name="wf_output" version="1">
 
         <event name="name">
-            <desciption>
+            <description summary="Output's name">
                 Represents a human-readable name for the output.
                 Usually this is the output's connector name.
                 The name is usually preserved across sessions.
@@ -11,7 +11,7 @@
         </event>
 
         <event name="layout">
-            <description>
+            <description summary="The output coordinates">
                 The output coordinates in the global coordinate space
             </description>
             <arg name="x" type="int"/>
@@ -36,13 +36,13 @@
         </request>
 
         <event name="available_mode">
-            <description>
+            <description summary="available mode">
                 Sends an available mode for the output
             </description>
             <arg name="width" type="int"/>
             <arg name="height" type="int"/>
             <arg name="refresh" type="int"/>
-            <arg name="current" type="bool" summary="whether this is the currently used mode"/>
+            <arg name="current" type="uint" summary="this is the current mode if >0"/>
         </event>
 
         <request name="set_mode">
@@ -60,11 +60,11 @@
         </request>
 
         <event name="scale">
-            <arg name="scale" type="float"/>
+            <arg name="scale" type="fixed"/>
         </event>
 
         <request name="set_scale">
-            <arg name="scale" type="float"/>
+            <arg name="scale" type="fixed"/>
         </request>
 
         <request name="destroy" type="destructor"/>
